@@ -5,11 +5,14 @@
              x:Class="XamarinNetworkProj.MainPage">
 
     <TabBar>
-        <Tab Title="tab1">
-            <ShellContent ContentTemplate="{DataTemplate local:InfoPage}" />
-        </Tab>
-        <Tab Title="tab2">
+        <Tab Title="Посты" Icon="icon_feed.png">
             <ShellContent ContentTemplate="{DataTemplate local:FeedPage}" />
+        </Tab>
+        <Tab Title="Аккаунты" Icon="icon_about.png">
+            <ShellContent ContentTemplate="{DataTemplate local:AllUsersPage}" />
+        </Tab>
+        <Tab Title="Моя странциа" Icon="icon_about.png">
+            <ShellContent ContentTemplate="{DataTemplate local:MyPage}" />
         </Tab>
     </TabBar>
 

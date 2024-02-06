@@ -1,0 +1,17 @@
+C:\Users\BathDuck\source\repos\XamarinNetworkProj\XamarinNetworkProj\XamarinNetworkProj\bin\Debug\netstandard2.0\XamarinNetworkProj.deps.json
+C:\Users\BathDuck\source\repos\XamarinNetworkProj\XamarinNetworkProj\XamarinNetworkProj\bin\Debug\netstandard2.0\XamarinNetworkProj.dll
+C:\Users\BathDuck\source\repos\XamarinNetworkProj\XamarinNetworkProj\XamarinNetworkProj\bin\Debug\netstandard2.0\ref\XamarinNetworkProj.dll
+C:\Users\BathDuck\source\repos\XamarinNetworkProj\XamarinNetworkProj\XamarinNetworkProj\bin\Debug\netstandard2.0\XamarinNetworkProj.pdb
+C:\Users\BathDuck\source\repos\XamarinNetworkProj\XamarinNetworkProj\XamarinNetworkProj\obj\Debug\netstandard2.0\XamarinNetworkProj.csproj.AssemblyReference.cache
+C:\Users\BathDuck\source\repos\XamarinNetworkProj\XamarinNetworkProj\XamarinNetworkProj\obj\Debug\netstandard2.0\XamarinNetworkProj.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\BathDuck\source\repos\XamarinNetworkProj\XamarinNetworkProj\XamarinNetworkProj\obj\Debug\netstandard2.0\App.xaml.g.cs
+C:\Users\BathDuck\source\repos\XamarinNetworkProj\XamarinNetworkProj\XamarinNetworkProj\obj\Debug\netstandard2.0\MainPage.xaml.g.cs
+C:\Users\BathDuck\source\repos\XamarinNetworkProj\XamarinNetworkProj\XamarinNetworkProj\obj\Debug\netstandard2.0\XamarinNetworkProj.AssemblyInfoInputs.cache
+C:\Users\BathDuck\source\repos\XamarinNetworkProj\XamarinNetworkProj\XamarinNetworkProj\obj\Debug\netstandard2.0\XamarinNetworkProj.AssemblyInfo.cs
+C:\Users\BathDuck\source\repos\XamarinNetworkProj\XamarinNetworkProj\XamarinNetworkProj\obj\Debug\netstandard2.0\XamarinNetworkProj.csproj.CoreCompileInputs.cache
+C:\Users\BathDuck\source\repos\XamarinNetworkProj\XamarinNetworkProj\XamarinNetworkProj\obj\Debug\netstandard2.0\XamlC.stamp
+C:\Users\BathDuck\source\repos\XamarinNetworkProj\XamarinNetworkProj\XamarinNetworkProj\obj\Debug\netstandard2.0\XamarinNetworkProj.dll
+C:\Users\BathDuck\source\repos\XamarinNetworkProj\XamarinNetworkProj\XamarinNetworkProj\obj\Debug\netstandard2.0\ref\XamarinNetworkProj.dll
+C:\Users\BathDuck\source\repos\XamarinNetworkProj\XamarinNetworkProj\XamarinNetworkProj\obj\Debug\netstandard2.0\XamarinNetworkProj.pdb
+C:\Users\BathDuck\source\repos\XamarinNetworkProj\XamarinNetworkProj\XamarinNetworkProj\obj\Debug\netstandard2.0\Views\FeedPage.xaml.g.cs
+C:\Users\BathDuck\source\repos\XamarinNetworkProj\XamarinNetworkProj\XamarinNetworkProj\obj\Debug\netstandard2.0\Views\InfoPage.xaml.g.cs

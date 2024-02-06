@@ -4,21 +4,14 @@
              x:Class="XamarinNetworkProj.Views.AllUsersPage">
 
     <ContentPage.Content>
-        <ListView x:Name="phonesList" ItemSelected="OnItemSelected">
+        <ListView x:Name="phonesList" ItemSelected="OnItemSelected" HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <ViewCell.View>
-                            <StackLayout Orientation="Horizontal">
-                                <Label FontSize="Medium">
-                                    <Label.Text>
-                                        <MultiBinding StringFormat="{}{0} {1} {2}">
-                                            <Binding Path="nickname" />
-                                            <Binding Path="desc" />
-                                            <Binding Path="phone" />
-                                        </MultiBinding>
-                                    </Label.Text>
-                                </Label>
+                            <StackLayout Orientation="Vertical">
+                                <Label FontSize="Medium" Text="{Binding nickname}" />
+                                <Label Text="{Binding desc}" MaxLines="1" LineBreakMode="TailTruncation" />
                             </StackLayout>
                         </ViewCell.View>
                     </ViewCell>

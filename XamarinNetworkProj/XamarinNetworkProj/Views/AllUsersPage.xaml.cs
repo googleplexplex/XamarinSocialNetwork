@@ -25,13 +25,6 @@ namespace XamarinNetworkProj.Views
         {
             // создание таблицы, если ее нет
             await App.Database.CreateTable();
-            // привязка данных
-            Account a = new Account();
-            a.Id = 0;
-            a.nickname = "11";
-            a.phone = "12";
-            a.desc = "13";
-            await App.Database.SaveItemAsync(a);
             phonesList.ItemsSource = await App.Database.GetItemsAsync();
 
             base.OnAppearing();

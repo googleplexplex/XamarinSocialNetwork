@@ -45,5 +45,9 @@ namespace XamarinNetworkProj
                 return await database.InsertAsync(item);
             }
         }
+        public async Task<int> Clear()
+        {
+            return await database.DeleteAllAsync<Account>();
+        }
     }
 }

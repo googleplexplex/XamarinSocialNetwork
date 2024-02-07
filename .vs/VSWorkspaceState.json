@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\XamarinNetworkProj",
+    "\\XamarinNetworkProj\\XamarinNetworkProj",
+    "\\XamarinNetworkProj\\XamarinNetworkProj\\Views"
   ],
-  "SelectedNode": "\\App3.sln",
+  "SelectedNode": "\\XamarinNetworkProj\\XamarinNetworkProj\\Views\\AllUsersPage.xaml",
   "PreviewInSolutionExplorer": false
 }

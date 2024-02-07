@@ -24,8 +24,8 @@ namespace XamarinNetworkProj.Views
         protected override async void OnAppearing()
         {
             // создание таблицы, если ее нет
-            await App.Database.CreateTable();
-            phonesList.ItemsSource = await App.Database.GetItemsAsync();
+            await App.FriendsTable.CreateTable();
+            phonesList.ItemsSource = await App.FriendsTable.GetItemsAsync();
 
             base.OnAppearing();
         }

@@ -10,8 +10,8 @@
                     <ViewCell>
                         <ViewCell.View>
                             <StackLayout Orientation="Vertical">
-                                <Label FontSize="Medium" Text="{Binding nickname}" />
-                                <Label Text="{Binding desc}" MaxLines="1" LineBreakMode="TailTruncation" />
+                                <Label FontSize="Medium" Text="{Binding nickname}" Margin="10,0,0,0" />
+                                <Label Text="{Binding desc}" MaxLines="1" LineBreakMode="TailTruncation" Margin="10,0,0,0" />
                             </StackLayout>
                         </ViewCell.View>
                     </ViewCell>

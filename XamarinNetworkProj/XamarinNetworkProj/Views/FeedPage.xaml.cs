@@ -16,5 +16,19 @@ namespace XamarinNetworkProj.Views
         {
             InitializeComponent();
         }
+
+        protected override async void OnAppearing()
+        {
+            // создание таблицы, если ее нет
+            await App.PostsTable.CreateTable();
+            postsList.ItemsSource = await App.PostsTable.GetItemsAsync();
+
+            base.OnAppearing();
+        }
+        // обработка нажатия элемента в списке
+        private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            return;
+        }
     }
 }

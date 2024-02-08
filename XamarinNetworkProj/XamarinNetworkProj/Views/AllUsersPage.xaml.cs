@@ -13,26 +13,31 @@ namespace XamarinNetworkProj.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AllUsersPage : ContentPage
     {
+        List<Account> accountsSource;
+
         public AllUsersPage()
         {
             InitializeComponent();
-
-            //string[] phones = new string[] { "iPhone 7", "Samsung Galaxy S8", "Huawei P10", "LG G6" };
-            //phonesList.ItemsSource = phones;
         }
 
         protected override async void OnAppearing()
         {
             // создание таблицы, если ее нет
             await App.FriendsTable.CreateTable();
-            phonesList.ItemsSource = await App.FriendsTable.GetItemsAsync();
+            accountsSource = await App.FriendsTable.GetItemsAsync();
+            phonesList.ItemsSource = accountsSource;
 
             base.OnAppearing();
         }
-        // обработка нажатия элемента в списке
-        private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+
+        private async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            return;
+            ((ListView)sender).SelectedItem = null;
+            if (e.SelectedItemIndex != -1)
+            {
+                var selectedUser = accountsSource[e.SelectedItemIndex];
+                await Navigation.PushAsync(new AccountPage(selectedUser));
+            }
         }
     }
 }

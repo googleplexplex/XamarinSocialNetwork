@@ -5,6 +5,8 @@ using Xamarin.Forms.Xaml;
 using System.Reflection;
 using XamarinNetworkProj.Model;
 using SQLite;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace XamarinNetworkProj
 {
@@ -12,6 +14,7 @@ namespace XamarinNetworkProj
     {
         public const string DATABASE_NAME = "network.db";
         public static FriendAsyncRepository friendsTable;
+        public static SQLiteAsyncConnection database;
         public static FriendAsyncRepository FriendsTable
         {
             get
@@ -35,7 +38,9 @@ namespace XamarinNetworkProj
                             }
                         }
                     }
-                    friendsTable = new FriendAsyncRepository(dbPath);
+                    if(database == null)
+                        database = new SQLiteAsyncConnection(dbPath);
+                    friendsTable = new FriendAsyncRepository(database);
                 }
                 return friendsTable;
             }
@@ -64,22 +69,15 @@ namespace XamarinNetworkProj
                             }
                         }
                     }
-                    postsTable = new PostAsyncRepository(dbPath);
+                    if (database == null)
+                        database = new SQLiteAsyncConnection(dbPath);
+                    postsTable = new PostAsyncRepository(database);
                 }
                 return postsTable;
             }
         }
 
-        private Account AccountConstr(string nickname, string phone, string desc, int id = 0)
-        {
-            Account a = new Account();
-            a.Id = id;
-            a.nickname = nickname;
-            a.phone = phone;
-            a.desc = desc;
-            return a;
-        }
-        private Post PostConstr(int autorId, string content, int likes, DateTime postedOn, int id = 0)
+        public Post PostConstr(int autorId, string content, int likes, DateTime postedOn, int id = 0)
         {
             Post a = new Post();
             a.Id = id;
@@ -89,24 +87,30 @@ namespace XamarinNetworkProj
             a.postedOn = postedOn;
             return a;
         }
+
         public App()
         {
             InitializeComponent();
 
-            App.FriendsTable.Clear();
-            App.FriendsTable.InsertItemAsync(AccountConstr("LunarDreamer", "123", "Dance in the moonlight and dream with the stars."));
-            App.FriendsTable.InsertItemAsync(AccountConstr("MysticSoul ", "123", "Embrace the mysteries of the universe within your soul."));
-            App.FriendsTable.InsertItemAsync(AccountConstr("EternalExplorer", "456", "Venture into the depths of the unknown and uncover eternal truths."));
-            App.FriendsTable.InsertItemAsync(AccountConstr("ShadowSeeker", "789", "Embrace the darkness within to find the light that guides your path."));
-            App.FriendsTable.InsertItemAsync(AccountConstr("EternalExplorer", "456", "Venture into the depths of the unknown and uncover eternal truths."));
-            App.FriendsTable.InsertItemAsync(AccountConstr("ShadowSeeker", "789", "Embrace the darkness within to find the light that guides your path."));
-            App.FriendsTable.InsertItemAsync(AccountConstr("SoulfulSeeker", "369", "Seek the depths of your soul to discover the true essence of your being."));
-            App.FriendsTable.InsertItemAsync(AccountConstr("StarryDreamer", "579", "Dream under the starlit sky and let the universe whisper its secrets to your soul."));
+            App.FriendsTable.CreateTable();
 
+            App.FriendsTable.Clear();
+            App.FriendsTable.InsertItemAsync(new Account("LunarDreamer", "123", "Dance in the moonlight and dream with the stars."));
+            App.FriendsTable.InsertItemAsync(new Account("MysticSoul ", "123", "Embrace the mysteries of the universe within your soul."));
+            App.FriendsTable.InsertItemAsync(new Account("EternalExplorer", "456", "Venture into the depths of the unknown and uncover eternal truths."));
+            App.FriendsTable.InsertItemAsync(new Account("ShadowSeeker", "789", "Embrace the darkness within to find the light that guides your path."));
+            App.FriendsTable.InsertItemAsync(new Account("EternalExplorer", "456", "Venture into the depths of the unknown and uncover eternal truths."));
+            App.FriendsTable.InsertItemAsync(new Account("ShadowSeeker", "789", "Embrace the darkness within to find the light that guides your path."));
+            App.FriendsTable.InsertItemAsync(new Account("SoulfulSeeker", "369", "Seek the depths of your soul to discover the true essence of your being."));
+            App.FriendsTable.InsertItemAsync(new Account("StarryDreamer", "579", "Dream under the starlit sky and let the universe whisper its secrets to your soul."));
+
+
+            List<Account> a = App.FriendsTable.database.Table<Account>().OrderBy(f => f.Id).ToListAsync().Result;
+            int minId = a[0].Id;
             App.PostsTable.Clear();
-            App.PostsTable.InsertItemAsync(PostConstr(1, "hi im 1", 2, DateTime.Now));
-            App.PostsTable.InsertItemAsync(PostConstr(2, "hi im 2", 2, DateTime.Now));
-            App.PostsTable.InsertItemAsync(PostConstr(3, "hi im 3", 2, DateTime.Now));
+            App.PostsTable.InsertItemAsync(PostConstr(minId, "hi im 1", 2, DateTime.Now));
+            App.PostsTable.InsertItemAsync(PostConstr(minId+1, "hi im 2", 2, DateTime.Now));
+            App.PostsTable.InsertItemAsync(PostConstr(minId+2, "hi im 3", 2, DateTime.Now));
 
             MainPage = new MainPage();
         }

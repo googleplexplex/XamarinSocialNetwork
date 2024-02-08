@@ -9,11 +9,11 @@ namespace XamarinNetworkProj
 {
     public class AsyncRepository<T> where T : new()
     {
-        SQLiteAsyncConnection database;
+        public SQLiteAsyncConnection database;
 
-        public AsyncRepository(string databasePath)
+        public AsyncRepository(SQLiteAsyncConnection database)
         {
-            database = new SQLiteAsyncConnection(databasePath);
+            this.database = database;
         }
 
         public async Task CreateTable()
@@ -49,11 +49,19 @@ namespace XamarinNetworkProj
 
     public class FriendAsyncRepository : AsyncRepository<Account>
     {
-        public FriendAsyncRepository(string databasePath) : base(databasePath) { }
+        public FriendAsyncRepository(SQLiteAsyncConnection database) : base(database) { }
+        public async Task<List<Account>> GetItemsAsyncById(int accId)
+        {
+            return await database.Table<Account>().Where(f => f.Id == accId).ToListAsync();
+        }
     }
     public class PostAsyncRepository : AsyncRepository<Post>
     {
-        public PostAsyncRepository(string databasePath) : base(databasePath) { }
+        public PostAsyncRepository(SQLiteAsyncConnection database) : base(database) { }
+        public async Task<List<Post>> GetItemsAsyncById(int autorId)
+        {
+            return await database.Table<Post>().Where(f => f.autorId == autorId).ToListAsync();
+        }
     }
 
 

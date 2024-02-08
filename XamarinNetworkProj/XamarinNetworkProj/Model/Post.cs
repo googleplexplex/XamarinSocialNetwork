@@ -15,5 +15,16 @@ namespace XamarinNetworkProj.Model
         public string content { get; set; }
         public int likes { get; set; }
         public DateTime postedOn { get; set; }
+
+        public Post() { }
+        public Post(int autorId, string content, int likes, DateTime postedOn, int id = 0)
+        {
+            this.Id = id;
+            this.autorId = autorId;
+            this.content = content;
+            this.likes = likes;
+            this.postedOn = postedOn;
+        }
+        
     }
 }

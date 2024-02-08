@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XamarinNetworkProj.Model;
 
 namespace XamarinNetworkProj.Views
 {
@@ -21,14 +22,23 @@ namespace XamarinNetworkProj.Views
         {
             // создание таблицы, если ее нет
             await App.PostsTable.CreateTable();
-            postsList.ItemsSource = await App.PostsTable.GetItemsAsync();
+
+            List<PostShared> sharedPostList = new List<PostShared>();
+            List<Post> postList = await App.PostsTable.GetItemsAsync();
+            for (int i = 0; i < postList.Count(); i++)
+            {
+                sharedPostList.Add(PostShared.getFromPost(postList[i]));
+                sharedPostList[i].autorName = (await App.FriendsTable.GetItemsAsyncById(postList[i].autorId))[0].nickname;
+            }
+
+            postsList.ItemsSource = sharedPostList;
 
             base.OnAppearing();
         }
-        // обработка нажатия элемента в списке
+
         private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            return;
+            ((ListView)sender).SelectedItem = null;
         }
     }
 }

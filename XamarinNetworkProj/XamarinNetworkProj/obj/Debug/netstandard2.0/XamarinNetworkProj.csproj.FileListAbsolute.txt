@@ -33,3 +33,4 @@ C:\Users\BathDuck\Source\Repos\XamarinSocialNetwork\XamarinNetworkProj\XamarinNe
 C:\Users\BathDuck\Source\Repos\XamarinSocialNetwork\XamarinNetworkProj\XamarinNetworkProj\obj\Debug\netstandard2.0\XamarinNetworkProj.pdb
 C:\Users\BathDuck\Source\Repos\XamarinSocialNetwork\XamarinNetworkProj\XamarinNetworkProj\obj\Debug\netstandard2.0\Views\AllUsersPage.xaml.g.cs
 C:\Users\BathDuck\Source\Repos\XamarinSocialNetwork\XamarinNetworkProj\XamarinNetworkProj\obj\Debug\netstandard2.0\Views\MyPage.xaml.g.cs
+C:\Users\BathDuck\Source\Repos\XamarinSocialNetwork\XamarinNetworkProj\XamarinNetworkProj\obj\Debug\netstandard2.0\Views\AccountPage.xaml.g.cs

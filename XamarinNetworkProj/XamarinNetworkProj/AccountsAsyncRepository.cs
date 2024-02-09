@@ -10,6 +10,7 @@ namespace XamarinNetworkProj
     public class AsyncRepository<T> where T : new()
     {
         public SQLiteAsyncConnection database;
+        public int lastErr;
 
         public AsyncRepository(SQLiteAsyncConnection database)
         {

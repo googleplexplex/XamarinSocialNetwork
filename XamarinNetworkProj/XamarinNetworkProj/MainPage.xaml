@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:XamarinNetworkProj.Views"
              x:Class="XamarinNetworkProj.MainPage">
-
+    <Shell.FlyoutContent>
+        
+    </Shell.FlyoutContent>
     <TabBar>
         <Tab Title="Посты" Icon="icon_feed.png">
             <ShellContent ContentTemplate="{DataTemplate local:FeedPage}" />

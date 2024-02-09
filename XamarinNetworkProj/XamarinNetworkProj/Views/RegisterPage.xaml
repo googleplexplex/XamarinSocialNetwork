@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamarinNetworkProj.Views.RegisterPage">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand">
+            <Label Text="Sign Up" FontSize="Large" HorizontalOptions="CenterAndExpand" />
+            <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" >
+                <Label Text="Login       " Margin="0,20,0,0" />
+                <Entry x:Name="RegLogin" WidthRequest="100" TextChanged="RegLogin_TextChanged" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" >
+                <Label Text="Password" Margin="0,20,0,0" />
+                <Entry x:Name="RegPassowrd" WidthRequest="100" TextChanged="RegPassowrd_TextChanged" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" >
+                <Label Text="Pass x2    " Margin="0,20,0,0" />
+                <Entry x:Name="RegSecond" WidthRequest="100" TextChanged="RegSecond_TextChanged" />
+            </StackLayout>
+            <Label Text="What would you like&#10;to say to the world?" Margin="0,50,0,0" />
+            <Entry x:Name="RegDesc" />
+            <Button x:Name="RegButton" Clicked="RegButton_Clicked" Margin="0,20,0,0" Text="=>" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

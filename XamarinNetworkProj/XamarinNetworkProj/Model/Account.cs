@@ -12,7 +12,7 @@ namespace XamarinNetworkProj.Model
         public int Id { get; set; }
 
         public string nickname { get; set; }
-        public string phone { get; set; }
+        public string password { get; set; }
         public string desc { get; set; }
         public byte[] likedPosts { get; set; }
     }

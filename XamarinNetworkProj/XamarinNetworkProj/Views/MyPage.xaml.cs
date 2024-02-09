@@ -16,5 +16,12 @@ namespace XamarinNetworkProj.Views
         {
             InitializeComponent();
         }
+
+        private void quitButton_Clicked(object sender, EventArgs e)
+        {
+            App.Current.Properties.Remove("user");
+            Application.Current.SavePropertiesAsync();
+            Navigation.PushAsync(new NavigationPage(new LoginPage()));
+        }
     }
 }

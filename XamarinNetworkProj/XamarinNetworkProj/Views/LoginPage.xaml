@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamarinNetworkProj.Views.LoginPage">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand">
+            <Label Text="Welcome!" FontSize="Large" HorizontalOptions="CenterAndExpand" />
+            <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" >
+                <Label Text="Login       " Margin="0,20,0,0" />
+                <Entry x:Name="InpLogin" WidthRequest="100" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" >
+                <Label Text="Password" Margin="0,20,0,0" />
+                <Entry x:Name="InpPass" WidthRequest="100" TextChanged="InpPass_TextChanged" />
+            </StackLayout>
+            <Button x:Name="LoginButton" Margin="0,20,0,0" Text="=>" Clicked="Login_Clicked" />
+            <Label x:Name="SignUpHyperlink" Text="Sign up" TextColor="Blue" FontAttributes="Bold" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

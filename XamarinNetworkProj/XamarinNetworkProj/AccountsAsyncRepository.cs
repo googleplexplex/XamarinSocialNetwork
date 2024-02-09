@@ -55,6 +55,10 @@ namespace XamarinNetworkProj
         {
             return await database.Table<Account>().Where(f => f.Id == accId).ToListAsync();
         }
+        public async Task<Account> GetItemAsyncByLP(string login, string password)
+        {
+            return await database.Table<Account>().FirstOrDefaultAsync(f => f.nickname == login && f.password == password);
+        }
     }
     public class PostAsyncRepository : AsyncRepository<Post>
     {

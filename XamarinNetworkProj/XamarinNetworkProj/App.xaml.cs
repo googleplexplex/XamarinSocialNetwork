@@ -8,6 +8,7 @@ using SQLite;
 using System.Linq;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using XamarinNetworkProj.Views;
 
 namespace XamarinNetworkProj
 {
@@ -78,12 +79,12 @@ namespace XamarinNetworkProj
             }
         }
 
-        static private Account AccountConstr(string nickname, string phone, string desc, int id = 0)
+        static public Account AccountConstr(string nickname, string password, string desc, int id = 0)
         {
             Account a = new Account();
             a.Id = id;
             a.nickname = nickname;
-            a.phone = phone;
+            a.password = password;
             a.desc = desc;
             a.likedPosts = new byte[] {  };
             return a;
@@ -126,9 +127,17 @@ namespace XamarinNetworkProj
             Account user = AccountConstr("LunarDreamer", "123", "Dance in the moonlight and dream with the stars.", minId);
 
             if (!App.Current.Properties.ContainsKey("user"))
-                App.Current.Properties.Add("user", JsonConvert.SerializeObject(user));
-            Application.Current.SavePropertiesAsync();
+            {
+                MainPage = new NavigationPage(new LoginPage());
+            }
+            else
+            {
+                MainPage = new MainPage();
+            }
+        }
 
+        public void RedirectToREegistered()
+        {
             MainPage = new MainPage();
         }
 

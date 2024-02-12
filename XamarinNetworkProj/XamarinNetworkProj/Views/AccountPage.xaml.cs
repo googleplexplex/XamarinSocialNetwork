@@ -29,11 +29,11 @@ namespace XamarinNetworkProj.Views
 
         protected override async void OnAppearing()
         {
-            List<PostShared> sharedPostList = new List<PostShared>();
+            List<PostSharedOldDepricated> sharedPostList = new List<PostSharedOldDepricated>();
             List<Post> postList = await App.PostsTable.GetItemsAsyncById(viewedUserId.Id);
             for(int i = 0; i < postList.Count(); i++)
             {
-                sharedPostList.Add(PostShared.getFromPost(postList[i]));
+                sharedPostList.Add(PostSharedOldDepricated.getFromPost(postList[i]));
                 sharedPostList[i].autorName = viewedUserId.nickname;
             }
 

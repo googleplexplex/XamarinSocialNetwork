@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using Xamarin.Forms.Shapes;
 using Xamarin.Forms.Xaml;
 using XamarinNetworkProj.Model;
 
@@ -14,7 +15,7 @@ namespace XamarinNetworkProj.Views
     public class ClickCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
-        public FeedPage view;
+        public FeedPageViewModel view;
         public ClickCommand() { }
 
         public bool CanExecute(object parameter)
@@ -24,22 +25,29 @@ namespace XamarinNetworkProj.Views
 
         public void Execute(object parameter)
         {
+            int likedPostId = (parameter as PostShared).Id;
             Account updatedAccount = JsonConvert.DeserializeObject<Account>(App.Current.Properties["user"] as string);
             List<int> likedPosts = JsonConvert.DeserializeObject <List<int>>(updatedAccount.likedPosts);
 
             if (likedPosts == null) likedPosts = new List<int>();
-            if(likedPosts.Contains((parameter as PostShared).Id))
+            if (likedPosts.Contains(likedPostId))
             {
-                likedPosts.Remove((parameter as PostShared).Id);
+                likedPosts.Remove(likedPostId);
+                int dislikedPostIdInViewModel = view.itemsSource.IndexOf(view.itemsSource.First(f => f.Id == likedPostId));
+                view.itemsSource[dislikedPostIdInViewModel].likedByUser = new SolidColorBrush(Color.Gray);
             }
-            likedPosts.Add((parameter as PostShared).Id);
-            updatedAccount.likedPosts = JsonConvert.SerializeObject(likedPosts.GroupBy(x => x).Select(x => x.First()).ToList());
+            else
+            {
+                likedPosts.Add(likedPostId);
+                int likedPostIdInViewModel = view.itemsSource.IndexOf(view.itemsSource.First(f => f.Id == likedPostId));
+                view.itemsSource[likedPostIdInViewModel].likedByUser = new SolidColorBrush(Color.Red);
+            }
 
+            updatedAccount.likedPosts = JsonConvert.SerializeObject(likedPosts);
             string a = JsonConvert.SerializeObject(updatedAccount);
             App.Current.Properties["user"] = a;
             App.FriendsTable.UpdateItemAsync(updatedAccount);
             Application.Current.SavePropertiesAsync();
-            return;
         }
     }
 
@@ -48,13 +56,14 @@ namespace XamarinNetworkProj.Views
     public partial class FeedPage : ContentPage
     {
         public ICommand ClickCommand { get; }
-        public List<PostShared> sharedPostList = new List<PostShared>();
+        public FeedPageViewModel sharedPostList = new FeedPageViewModel();
 
         public FeedPage()
         {
             InitializeComponent();
             ClickCommand = new ClickCommand();
-            (ClickCommand as ClickCommand).view = this;
+            (ClickCommand as ClickCommand).view = sharedPostList;
+            return;
         }
 
         protected override async void OnAppearing()
@@ -68,12 +77,12 @@ namespace XamarinNetworkProj.Views
 
             for (int i = 0; i < postList.Count(); i++)
             {
-                sharedPostList.Add(PostShared.getFromPost(postList[i]));
-                sharedPostList[i].autorName = (await App.FriendsTable.GetItemsAsyncById(postList[i].autorId))[0].nickname;
-                sharedPostList[i].likedByUser = likedPosts.Contains(postList[i].Id) ? "icon_liked.png" : "icon_tolike.png";
+                sharedPostList.itemsSource.Add(PostShared.getFromPost(postList[i]));
+                sharedPostList.itemsSource[i].autorName = (await App.FriendsTable.GetItemsAsyncById(postList[i].autorId))[0].nickname;
+                sharedPostList.itemsSource[i].likedByUser = likedPosts.Contains(postList[i].Id) ? new SolidColorBrush(Color.Red) : new SolidColorBrush(Color.Gray);
             }
 
-            postsList.ItemsSource = sharedPostList;
+            postsList.ItemsSource = sharedPostList.itemsSource;
 
             base.OnAppearing();
         }

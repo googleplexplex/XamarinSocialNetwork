@@ -116,7 +116,6 @@ namespace XamarinNetworkProj
             //App.FriendsTable.InsertItemAsync(AccountConstr("SoulfulSeeker", "369", "Seek the depths of your soul to discover the true essence of your being."));
             //App.FriendsTable.InsertItemAsync(AccountConstr("StarryDreamer", "579", "Dream under the starlit sky and let the universe whisper its secrets to your soul."));
 
-
             List<Account> a = App.FriendsTable.database.Table<Account>().OrderBy(f => f.Id).ToListAsync().Result;
             int minId = a[0].Id;
             //App.PostsTable.Clear();

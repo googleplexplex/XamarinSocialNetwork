@@ -30,7 +30,10 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <ImageButton Source="{Binding likedByUser, Mode=TwoWay}" Aspect="AspectFit" BackgroundColor="White" Grid.Column="0" Grid.Row="0" Command="{Binding ClickCommand, Source={x:Reference FeedPageView}}" CommandParameter="{Binding .}"/>
+
+                                    <Ellipse Grid.Column="0" Grid.Row="0" Fill="{Binding Path=likedByUser, Mode=TwoWay}" />
+                                    
+                                    <ImageButton Source="icon_liked.png" BackgroundColor="Transparent"  Aspect="AspectFit" Grid.Column="0" Grid.Row="0" Command="{Binding ClickCommand, Source={x:Reference FeedPageView}}" CommandParameter="{Binding .}"/>
                                 </Grid>
 
                             </StackLayout>

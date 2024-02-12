@@ -1161,5 +1161,6 @@ C:\Users\BathDuck\Source\Repos\XamarinSocialNetwork\XamarinNetworkProj\XamarinNe
 C:\Users\BathDuck\Source\Repos\XamarinSocialNetwork\XamarinNetworkProj\XamarinNetworkProj.Android\obj\Debug\110\android\assets\System.Buffers.dll
 C:\Users\BathDuck\Source\Repos\XamarinSocialNetwork\XamarinNetworkProj\XamarinNetworkProj.Android\obj\Debug\110\android\assets\System.Memory.dll
 C:\Users\BathDuck\Source\Repos\XamarinSocialNetwork\XamarinNetworkProj\XamarinNetworkProj.Android\obj\Debug\110\android\assets\System.Runtime.CompilerServices.Unsafe.dll
-C:\Users\BathDuck\Source\Repos\XamarinSocialNetwork\XamarinNetworkProj\XamarinNetworkProj.Android\obj\Debug\110\res\drawable\icon_like.png
 C:\Users\BathDuck\Source\Repos\XamarinSocialNetwork\XamarinNetworkProj\XamarinNetworkProj.Android\obj\Debug\110\android\assets\Newtonsoft.Json.dll
+C:\Users\BathDuck\Source\Repos\XamarinSocialNetwork\XamarinNetworkProj\XamarinNetworkProj.Android\obj\Debug\110\res\drawable\icon_tolike.png
+C:\Users\BathDuck\Source\Repos\XamarinSocialNetwork\XamarinNetworkProj\XamarinNetworkProj.Android\obj\Debug\110\res\drawable\icon_liked.png

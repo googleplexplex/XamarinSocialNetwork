@@ -14,6 +14,6 @@ namespace XamarinNetworkProj.Model
         public string nickname { get; set; }
         public string password { get; set; }
         public string desc { get; set; }
-        public byte[] likedPosts { get; set; }
+        public string likedPosts { get; set; }
     }
 }

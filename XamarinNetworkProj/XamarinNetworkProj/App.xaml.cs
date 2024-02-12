@@ -86,7 +86,7 @@ namespace XamarinNetworkProj
             a.nickname = nickname;
             a.password = password;
             a.desc = desc;
-            a.likedPosts = new byte[] {  };
+            a.likedPosts = JsonConvert.SerializeObject(new List<int>());
             return a;
         }
         public Post PostConstr(int autorId, string content, int likes, DateTime postedOn, int id = 0)

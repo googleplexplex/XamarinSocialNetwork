@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XamarinNetworkProj.Model;
@@ -14,12 +15,17 @@ namespace XamarinNetworkProj.Views
     public partial class AccountPage : ContentPage
     {
         public Account viewedUserId;
+        public ICommand ClickCommand { get; }
+        public FeedPageViewModel sharedPostList = new FeedPageViewModel();
 
         public AccountPage(Account user)
         {
             viewedUserId = user;
 
             InitializeComponent();
+
+            ClickCommand = new ClickCommand();
+            (ClickCommand as ClickCommand).view = sharedPostList;
 
             NicknameLabel.BindingContext = viewedUserId;
             NicknameLabel.SetBinding(Label.TextProperty, "nickname");
@@ -29,20 +35,28 @@ namespace XamarinNetworkProj.Views
 
         protected override async void OnAppearing()
         {
-            List<PostSharedOldDepricated> sharedPostList = new List<PostSharedOldDepricated>();
+            if (sharedPostList.itemsSource.Count() != 0)
+                return;
+
+            await App.PostsTable.CreateTable();
+
             List<Post> postList = await App.PostsTable.GetItemsAsyncById(viewedUserId.Id);
-            for(int i = 0; i < postList.Count(); i++)
+            Account user = JsonConvert.DeserializeObject<Account>(App.Current.Properties["user"] as string);
+            List<int> likedPosts = JsonConvert.DeserializeObject<List<int>>(user.likedPosts);
+
+            for (int i = 0; i < postList.Count(); i++)
             {
-                sharedPostList.Add(PostSharedOldDepricated.getFromPost(postList[i]));
-                sharedPostList[i].autorName = viewedUserId.nickname;
+                sharedPostList.itemsSource.Add(PostShared.getFromPost(postList[i]));
+                sharedPostList.itemsSource[i].autorName = viewedUserId.nickname;
+                sharedPostList.itemsSource[i].likedByUser = likedPosts.Contains(postList[i].Id) ? new SolidColorBrush(Color.Red) : new SolidColorBrush(Color.Gray);
             }
 
-            postsList.ItemsSource = sharedPostList;
+            postsList.ItemsSource = sharedPostList.itemsSource;
 
             base.OnAppearing();
         }
 
-        private async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             ((ListView)sender).SelectedItem = null;
         }

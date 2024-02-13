@@ -63,26 +63,39 @@ namespace XamarinNetworkProj.Views
             InitializeComponent();
             ClickCommand = new ClickCommand();
             (ClickCommand as ClickCommand).view = sharedPostList;
-            return;
         }
 
         protected override async void OnAppearing()
         {
-            // создание таблицы, если ее нет
-            await App.PostsTable.CreateTable();
-
-            List<Post> postList = await App.PostsTable.GetItemsAsync();
-            Account user = JsonConvert.DeserializeObject<Account>(App.Current.Properties["user"] as string);
-            List<int> likedPosts = JsonConvert.DeserializeObject<List<int>>(user.likedPosts);
-
-            for (int i = 0; i < postList.Count(); i++)
+            if (sharedPostList.itemsSource.Count() == 0)
             {
-                sharedPostList.itemsSource.Add(PostShared.getFromPost(postList[i]));
-                sharedPostList.itemsSource[i].autorName = (await App.FriendsTable.GetItemsAsyncById(postList[i].autorId))[0].nickname;
-                sharedPostList.itemsSource[i].likedByUser = likedPosts.Contains(postList[i].Id) ? new SolidColorBrush(Color.Red) : new SolidColorBrush(Color.Gray);
-            }
+                // создание таблицы, если ее нет
+                await App.PostsTable.CreateTable();
 
-            postsList.ItemsSource = sharedPostList.itemsSource;
+                List<Post> postList = await App.PostsTable.GetItemsAsync();
+                Account user = JsonConvert.DeserializeObject<Account>(App.Current.Properties["user"] as string);
+                List<int> likedPosts = JsonConvert.DeserializeObject<List<int>>(user.likedPosts);
+
+                for (int i = 0; i < postList.Count(); i++)
+                {
+                    sharedPostList.itemsSource.Add(PostShared.getFromPost(postList[i]));
+                    sharedPostList.itemsSource[i].autorName = (await App.FriendsTable.GetItemsAsyncById(postList[i].autorId))[0].nickname;
+                    sharedPostList.itemsSource[i].likedByUser = likedPosts.Contains(postList[i].Id) ? new SolidColorBrush(Color.Red) : new SolidColorBrush(Color.Gray);
+                }
+
+                postsList.ItemsSource = sharedPostList.itemsSource;
+            }
+            else
+            {
+                List<Post> postList = await App.PostsTable.GetItemsAsync();
+                Account user = JsonConvert.DeserializeObject<Account>(App.Current.Properties["user"] as string);
+                List<int> likedPosts = JsonConvert.DeserializeObject<List<int>>(user.likedPosts);
+
+                for (int i = 0; i < postList.Count(); i++)
+                {
+                    sharedPostList.itemsSource[i].likedByUser = likedPosts.Contains(postList[i].Id) ? new SolidColorBrush(Color.Red) : new SolidColorBrush(Color.Gray);
+                }
+            }
 
             base.OnAppearing();
         }

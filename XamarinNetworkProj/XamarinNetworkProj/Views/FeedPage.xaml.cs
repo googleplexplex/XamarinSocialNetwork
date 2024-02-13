@@ -16,6 +16,7 @@ namespace XamarinNetworkProj.Views
     {
         public event EventHandler CanExecuteChanged;
         public FeedPageViewModel view;
+        public EventHandler updateView = null;
         public ClickCommand() { }
 
         public bool CanExecute(object parameter)
@@ -25,7 +26,8 @@ namespace XamarinNetworkProj.Views
 
         public void Execute(object parameter)
         {
-            int likedPostId = (parameter as PostShared).Id;
+            PostShared likedPost = (parameter as PostShared);
+            int likedPostId = likedPost.Id;
             Account updatedAccount = JsonConvert.DeserializeObject<Account>(App.Current.Properties["user"] as string);
             List<int> likedPosts = JsonConvert.DeserializeObject <List<int>>(updatedAccount.likedPosts);
 
@@ -34,20 +36,24 @@ namespace XamarinNetworkProj.Views
             {
                 likedPosts.Remove(likedPostId);
                 int dislikedPostIdInViewModel = view.itemsSource.IndexOf(view.itemsSource.First(f => f.Id == likedPostId));
+                likedPost.likes--;
                 view.itemsSource[dislikedPostIdInViewModel].likedByUser = new SolidColorBrush(Color.Gray);
             }
             else
             {
                 likedPosts.Add(likedPostId);
                 int likedPostIdInViewModel = view.itemsSource.IndexOf(view.itemsSource.First(f => f.Id == likedPostId));
+                likedPost.likes++;
                 view.itemsSource[likedPostIdInViewModel].likedByUser = new SolidColorBrush(Color.Red);
             }
+            App.PostsTable.UpdateItemAsync(new Post(likedPost.autorId, likedPost.content, likedPost.likes, likedPost.postedOn, likedPost.Id));
 
             updatedAccount.likedPosts = JsonConvert.SerializeObject(likedPosts);
-            string a = JsonConvert.SerializeObject(updatedAccount);
-            App.Current.Properties["user"] = a;
+            App.Current.Properties["user"] = JsonConvert.SerializeObject(updatedAccount);
             App.FriendsTable.UpdateItemAsync(updatedAccount);
             Application.Current.SavePropertiesAsync();
+
+            updateView?.Invoke(null, null);
         }
     }
 
@@ -63,9 +69,10 @@ namespace XamarinNetworkProj.Views
             InitializeComponent();
             ClickCommand = new ClickCommand();
             (ClickCommand as ClickCommand).view = sharedPostList;
+            (ClickCommand as ClickCommand).updateView += UpdatePage;
         }
 
-        public async void UpdatePage()
+        public async void UpdatePage(object sender = null, EventArgs a = null)
         {
             List<PostShared> newItemsSource = new List<PostShared>();
 

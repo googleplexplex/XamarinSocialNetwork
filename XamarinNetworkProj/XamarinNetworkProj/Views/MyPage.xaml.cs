@@ -25,12 +25,13 @@ namespace XamarinNetworkProj.Views
             InitializeComponent();
             ClickCommand = new ClickCommand();
             (ClickCommand as ClickCommand).view = sharedPostList;
+            (ClickCommand as ClickCommand).updateView += UpdatePage;
 
             NicknameLabel.Text = user.nickname;
             DescLabel.Text = user.desc;
         }
 
-        public async void UpdatePage()
+        public async void UpdatePage(object sender = null, EventArgs a = null)
         {
             user = JsonConvert.DeserializeObject<Account>(App.Current.Properties["user"] as string);
             List<Post> postList = await App.PostsTable.GetItemsAsyncById(user.Id);

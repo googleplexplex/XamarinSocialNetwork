@@ -1,13 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="XamarinNetworkProj.Views.MyPage">
+             x:Class="XamarinNetworkProj.Views.MyPage"
+             x:Name="MyPageView">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-            <Button x:Name="quitButton" Clicked="quitButton_Clicked" />
+        <StackLayout Orientation="Vertical" Margin="15,15,0,0">
+            <StackLayout Orientation="Horizontal">
+                <Label x:Name="NicknameLabel" FontSize="Large" />
+                <Button x:Name="quitButton" Text="Выйти" Clicked="quitButton_Clicked" HorizontalOptions="End" />
+            </StackLayout>
+            <Label x:Name="DescLabel" FontAttributes="Italic" />
+            <Button x:Name="NewPostButton" Text="Новый пост" Margin="0,15,15,0" Clicked="NewPostButton_Clicked" />
+            <ListView x:Name="postsList" ItemSelected="OnItemSelected" HasUnevenRows="True" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout Orientation="Vertical" Margin="0,10">
+                                    <Label Text="{Binding Id}"></Label>
+                                    <Label Margin="15,0,0,0" >
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="by " FontSize="Small" />
+                                                <Span FontSize="Medium" Text="{Binding autorName}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label Text="{Binding content}" MaxLines="1" FontSize="Medium" Margin="10,0,0,0" />
+
+                                    <Grid Margin="10,0,0,0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="30" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="30" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Ellipse Grid.Column="0" Grid.Row="0" Fill="{Binding Path=likedByUser, Mode=TwoWay}" />
+
+                                        <ImageButton Source="icon_liked.png" BackgroundColor="Transparent"  Aspect="AspectFit" Grid.Column="0" Grid.Row="0" Command="{Binding ClickCommand, Source={x:Reference MyPageView}}" CommandParameter="{Binding .}"/>
+                                    </Grid>
+
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

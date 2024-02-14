@@ -26,6 +26,7 @@ namespace XamarinNetworkProj.Views
 
             ClickCommand = new ClickCommand();
             (ClickCommand as ClickCommand).view = sharedPostList;
+            (ClickCommand as ClickCommand).updateView += UpdatePage;
 
             NicknameLabel.BindingContext = viewedUserId;
             NicknameLabel.SetBinding(Label.TextProperty, "nickname");
@@ -33,7 +34,7 @@ namespace XamarinNetworkProj.Views
             DescLabel.SetBinding(Label.TextProperty, "desc");
         }
 
-        public async void UpdatePage()
+        public async void UpdatePage(object sender = null, EventArgs a = null)
         {
             List<PostShared> newItemsSource = new List<PostShared>();
 

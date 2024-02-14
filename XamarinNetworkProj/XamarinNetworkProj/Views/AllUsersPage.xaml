@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="XamarinNetworkProj.Views.AllUsersPage">
+             x:Class="XamarinNetworkProj.Views.AllUsersPage"
+             Title="Пользователи">
 
     <ContentPage.Content>
         <ListView x:Name="phonesList" ItemSelected="OnItemSelected" HasUnevenRows="True">

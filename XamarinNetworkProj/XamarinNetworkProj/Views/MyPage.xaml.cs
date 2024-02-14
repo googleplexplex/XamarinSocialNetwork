@@ -73,11 +73,11 @@ namespace XamarinNetworkProj.Views
             base.OnAppearing();
         }
 
-        private void quitButton_Clicked(object sender, EventArgs e)
+        private async void quitButton_Clicked(object sender, EventArgs e)
         {
             App.Current.Properties.Remove("user");
-            Application.Current.SavePropertiesAsync();
-            Navigation.PushAsync(new NavigationPage(new LoginPage()));
+            await Application.Current.SavePropertiesAsync();
+            System.Diagnostics.Process.GetCurrentProcess().Kill();
         }
 
         private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)

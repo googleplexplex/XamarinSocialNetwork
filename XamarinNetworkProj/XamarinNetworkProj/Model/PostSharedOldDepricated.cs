@@ -10,14 +10,14 @@ namespace XamarinNetworkProj.Model
         public string likedByUser { get; set; }
 
         public PostSharedOldDepricated() : base() { }
-        public PostSharedOldDepricated(string autorName, int autorId, string content, int likes, DateTime postedOn, int id = 0) : base(autorId, content, likes, postedOn, id)
+        public PostSharedOldDepricated(string autorName, int autorId, string content, int likes, int id = 0) : base(autorId, content, likes, id)
         {
             this.autorName = autorName;
         }
 
         static public PostSharedOldDepricated getFromPost(Post p)
         {
-            return new PostSharedOldDepricated("", p.autorId, p.content, p.likes, p.postedOn, p.Id);
+            return new PostSharedOldDepricated("", p.autorId, p.content, p.likes, p.Id);
         }
     }
 }

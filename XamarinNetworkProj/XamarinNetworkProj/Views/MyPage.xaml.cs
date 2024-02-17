@@ -91,7 +91,7 @@ namespace XamarinNetworkProj.Views
 
             if(result != null)
             {
-                Post addedPost = new Post(user.Id, result, 0, DateTime.Now);
+                Post addedPost = new Post(user.Id, result, 0);
                 await App.PostsTable.InsertItemAsync(addedPost);
                 PostShared addedPostShared = PostShared.getFromPost(addedPost);
                 addedPostShared.autorName = user.nickname;

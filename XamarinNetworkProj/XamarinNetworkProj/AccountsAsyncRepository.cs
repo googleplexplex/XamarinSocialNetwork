@@ -59,6 +59,10 @@ namespace XamarinNetworkProj
         {
             return await database.Table<Account>().FirstOrDefaultAsync(f => f.nickname == login && f.password == password);
         }
+        public async Task<int> DeleteItemsAsyncById(int accId)
+        {
+            return await database.DeleteAsync((await GetItemsAsyncById(accId))[0]);
+        }
     }
     public class PostAsyncRepository : AsyncRepository<Post>
     {
@@ -66,6 +70,10 @@ namespace XamarinNetworkProj
         public async Task<List<Post>> GetItemsAsyncById(int autorId)
         {
             return await database.Table<Post>().Where(f => f.autorId == autorId).ToListAsync();
+        }
+        public async Task<int> DeleteItemsAsyncById(int postId)
+        {
+            return await database.DeleteAsync((await GetItemsAsyncById(postId))[0]);
         }
     }
 

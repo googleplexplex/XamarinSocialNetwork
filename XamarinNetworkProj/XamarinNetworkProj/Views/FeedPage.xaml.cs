@@ -46,7 +46,7 @@ namespace XamarinNetworkProj.Views
                 likedPost.likes++;
                 view.itemsSource[likedPostIdInViewModel].likedByUser = new SolidColorBrush(Color.Red);
             }
-            App.PostsTable.UpdateItemAsync(new Post(likedPost.autorId, likedPost.content, likedPost.likes, likedPost.postedOn, likedPost.Id));
+            App.PostsTable.UpdateItemAsync(new Post(likedPost.autorId, likedPost.content, likedPost.likes, likedPost.Id));
 
             updatedAccount.likedPosts = JsonConvert.SerializeObject(likedPosts);
             App.Current.Properties["user"] = JsonConvert.SerializeObject(updatedAccount);

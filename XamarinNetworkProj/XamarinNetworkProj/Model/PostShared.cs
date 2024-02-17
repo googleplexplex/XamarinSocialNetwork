@@ -24,14 +24,14 @@ namespace XamarinNetworkProj.Model
         }
 
         public PostShared() : base() { }
-        public PostShared(string autorName, int autorId, string content, int likes, DateTime postedOn, int id = 0) : base(autorId, content, likes, postedOn, id)
+        public PostShared(string autorName, int autorId, string content, int likes, int id = 0) : base(autorId, content, likes, id)
         {
             this.autorName = autorName;
         }
 
         static public PostShared getFromPost(Post p)
         {
-            return new PostShared("", p.autorId, p.content, p.likes, p.postedOn, p.Id);
+            return new PostShared("", p.autorId, p.content, p.likes, p.Id);
         }
 
 

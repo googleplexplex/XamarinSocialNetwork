@@ -104,11 +104,6 @@ namespace XamarinNetworkProj
             InitializeComponent();
         }
 
-        public void RedirectToREegistered()
-        {
-            MainPage = new MainPage();
-        }
-
         protected async override void OnStart()
         {
             //await App.FriendsTable.CreateTable();

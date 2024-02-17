@@ -1,6 +1,3 @@
 Небольшая текстовая соцсеть на Xamarin.Forms
 
-
-
-https://github.com/googleplexplex/XamarinSocialNetwork/assets/53963106/538c9ec5-12f0-4592-a24d-c8ca591ae45d
-
+![demo](https://github.com/googleplexplex/XamarinSocialNetwork/assets/53963106/30c77356-ecb9-451e-8330-bdd83e7865cb)
